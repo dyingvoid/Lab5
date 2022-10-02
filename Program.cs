@@ -12,14 +12,23 @@ class Program
     public static void ExecuteTaskFirst()
     {
         string input = "";
-        while(input != "q")
+        int intToChar = 0;
+        float floatCompare1 = float.NaN;
+        float floatCompare2 = float.NaN;
+        while (input != "q")
         {
             input = Console.ReadLine();
 
-            int integerToCharVal = 0;
-            bool intOverflow = CheckForIntOverflow(input);
-            Console.WriteLine(intOverflow);
-            float floatToCompare = float.NaN;
+            if(int.TryParse(input, out intToChar))
+            {
+                Console.WriteLine((char)intToChar);
+            }
+            else if(float.TryParse(input, out floatCompare2))
+            {
+                if (floatCompare2 == floatCompare1)
+                    break;
+                floatCompare1 = floatCompare2;
+            }
         }
     }
 
