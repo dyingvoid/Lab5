@@ -40,7 +40,7 @@ class Program
         while(inputIsInt)
         {
             input = Console.ReadLine();
-            Console.WriteLine((char)FindSumOfDigitsInNumber(input));
+            Console.WriteLine(FindSumOfDigitsInNumber(input));
         }
     }
 
@@ -51,7 +51,7 @@ class Program
         {
             minNumber += ch;
         }
-        return minNumber - '0' - 24 * input.Length;
+        return minNumber - '0' - (48 * input.Length);
     }
 
     //Check if set formed from input is subset of checking set
