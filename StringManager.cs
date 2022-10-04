@@ -2,7 +2,12 @@
 {
     public static class StringManager
     {
-        
+        /// <summary>
+        /// Finds sum of digits in input. If input  is negative,
+        /// the first digit is considered to be negative.
+        /// </summary>
+        /// <param name="input">string number</param>
+        /// <returns>Sum of digits</returns>
         public static int FindSumOfDigitsInNumber(string input)
         {
             char minNumber = '0';
@@ -13,14 +18,17 @@
             }
             answer =  minNumber - '0' - (48 * input.Length);
             if (IsNegative(input))
-                answer = minNumber - '0' - 45 - 48;
+                answer = minNumber - '0' - '-' - (input[1] * 2) + 48 - (48 * (input.Length - 2));
             return answer;
         }
 
-        //Check if set formed from input is subset of checking set
-        //to be precious if string contains nums
-        //or '-' in the right place([0] or no occurence)
-        //returns true for empty string, check docs to know why
+        /// <summary>
+        /// Checks if set formed from input is subset of checking set,
+        /// to be precious if string contains nums
+        /// or '-' in the right place(cant be [1] or further)
+        /// </summary>
+        /// <param name="input">string number</param>
+        /// <returns>true for right or empty input, false otherwise</returns>
         public static bool CheckForWrongChars(string input)
         {
             bool answer;
@@ -36,6 +44,11 @@
             return answer;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="number"></param>
+        /// <returns>string without '-' in [0] place</returns>
         public static string StringAbs(string number)
         {
             string absedString = "";
@@ -52,10 +65,15 @@
             return answer;
         }
 
+        /// <summary>
+        /// Checks input to be less than value
+        /// </summary>
+        /// <param name="input"></param>
+        /// <param name="value"></param>
+        /// <returns>true if input is bigger than value, false otherwise</returns>
         public static bool CheckForIntOverflow(string input, string value)
         {
             bool answer = false;
-            //input must be less or equal than value
             if (input.Length > value.Length)
             {
                 answer = true;
