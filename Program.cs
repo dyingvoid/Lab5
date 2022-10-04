@@ -1,7 +1,6 @@
 ﻿// Copyright 2022 dyingvoid
 
 using Lab5;
-using System.IO.Compression;
 
 class Program
 {
@@ -41,7 +40,10 @@ class Program
         while(inputIsInt)
         {
             input = Console.ReadLine();
-            Console.WriteLine(CheckInput(input));
+            if (CheckInput(input))
+                Console.WriteLine(StringManager.FindSumOfDigitsInNumber(input));
+            else
+                Console.WriteLine("Invalid input - input must be integer number.");
         }
     }
 

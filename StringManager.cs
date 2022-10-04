@@ -1,21 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Lab5
+﻿namespace Lab5
 {
     public static class StringManager
     {
+        
         public static int FindSumOfDigitsInNumber(string input)
         {
             char minNumber = '0';
+            int answer;
             foreach (var ch in input)
             {
                 minNumber += ch;
             }
-            return minNumber - '0' - (48 * input.Length);
+            answer =  minNumber - '0' - (48 * input.Length);
+            if (IsNegative(input))
+                answer = minNumber - '0' - 45 - 48;
+            return answer;
         }
 
         //Check if set formed from input is subset of checking set
@@ -24,14 +23,16 @@ namespace Lab5
         //returns true for empty string, check docs to know why
         public static bool CheckForWrongChars(string input)
         {
-            bool answer = false;
+            bool answer;
             //using two hashsets is claimed to be O(n)
             var inputSet = new HashSet<char>(input);
             var testingSet = new HashSet<char>(
-                new char[] { '-', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' }
+                new[] { '-', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' }
                 );
             answer = inputSet.IsProperSubsetOf(testingSet) &&
-                     input.IndexOf('-') <= 0;
+                     input.Substring(1, input.Length - 1).IndexOf('-') == -1;
+            if (answer && input.Length == 1)
+                answer = input[0] != '-';
             return answer;
         }
 
@@ -40,21 +41,14 @@ namespace Lab5
             string absedString = "";
             if (number.Length > 0)
             {
-                if (number[0] == '-')
-                    absedString = number.Substring(1, number.Length - 1);
-                else
-                    absedString = number;
+                absedString = number[0] == '-' ? number.Substring(1, number.Length - 1) : number;
             }
             return absedString;
         }
 
         public static bool IsNegative(string number)
         {
-            bool answer = false;
-            if (number[0] == '-')
-            {
-                answer = true;
-            }
+            bool answer = number[0] == '-';
             return answer;
         }
 
