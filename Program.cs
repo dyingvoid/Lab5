@@ -6,9 +6,10 @@ class Program
 {
     public static void Main()
     {
-        string option = Console.ReadLine();
+        string option = "";
         while (option != "q")
         {
+            option = Console.ReadLine();
             switch (option)
             {
                 case "1":
@@ -38,7 +39,7 @@ class Program
         {
             input = Console.ReadLine();
             
-            if (CheckInputTask1(input))
+            if (!CheckInputTask1(input))
             {
                 continue;
             }
@@ -49,10 +50,10 @@ class Program
             }
             else if(float.TryParse(input, out floatCompare2))
             {
-                if (CheckForIntOverFlowTask1(input))
+                if (!CheckForIntOverFlowTask1(input))
                     continue;
                 
-                if (floatCompare2 == floatCompare1)
+                if (CompareFloats(floatCompare1, floatCompare2, 0.1))
                     break;
                 floatCompare1 = floatCompare2;
             }
@@ -87,6 +88,17 @@ class Program
             answer = false;
         }
 
+        return answer;
+    }
+
+    public static bool CompareFloats(float first, float second, double eps)
+    {
+        bool answer = false;
+        float absFirst = Math.Abs(first);
+        float absSecond = Math.Abs(second);
+        float absDif = Math.Abs(absFirst - absSecond);
+        if (absDif <= 0 + eps && absDif >= 0 - eps)
+            answer = true;
         return answer;
     }
 
