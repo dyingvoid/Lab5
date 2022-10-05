@@ -29,14 +29,17 @@
         /// </summary>
         /// <param name="input">string number</param>
         /// <returns>true for right or empty input, false otherwise</returns>
-        public static bool CheckForWrongChars(string input)
+        public static bool CheckForWrongChars(string input, List<char> additionalSymbols = null)
         {
             bool answer;
+            additionalSymbols ??= new List<char>() {
+                '0', '1', '2', '3', '4', '5', '6', '7',
+                '8', '9', '-'
+            };
             //using two hashsets is claimed to be O(n)
             var inputSet = new HashSet<char>(input);
-            var testingSet = new HashSet<char>(
-                new[] { '-', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' }
-                );
+            var testingSet = new HashSet<char>(additionalSymbols);
+            
             answer = inputSet.IsProperSubsetOf(testingSet) &&
                      input.Substring(1, input.Length - 1).IndexOf('-') == -1;
             if (answer && input.Length == 1)
@@ -71,7 +74,7 @@
         /// <param name="input"></param>
         /// <param name="value"></param>
         /// <returns>true if input is bigger than value, false otherwise</returns>
-        public static bool CheckForIntOverflow(string input, string value)
+        public static bool IsLess(string input, string value)
         {
             bool answer = false;
             if (input.Length > value.Length)
