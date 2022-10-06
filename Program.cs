@@ -20,6 +20,10 @@ class Program
                     Console.WriteLine("SecondTask");
                     ExecuteSecondTask();
                     break;
+                case "4":
+                    Console.WriteLine("Executing task 4");
+                    ExecuteFourthTask();
+                    break;
                 case "q":
                     break;
                 default:
@@ -39,7 +43,7 @@ class Program
         {
             input = Console.ReadLine();
             
-            if (!CheckInputTask1(input))
+            if (!CheckInputToBeIntOrFloat(input))
             {
                 continue;
             }
@@ -60,7 +64,7 @@ class Program
         }
     }
 
-    public static bool CheckInputTask1(string input)
+    public static bool CheckInputToBeIntOrFloat(string input)
     {
         bool answer = true;
         List<char> checkList = new List<char>()
@@ -70,7 +74,7 @@ class Program
         };
         if (string.IsNullOrEmpty(input) || input.Length == 0 || !StringManager.CheckForWrongChars(input, checkList))
         {
-            Console.WriteLine("Your input contains wrong characters," +
+            Console.WriteLine("Your input contains wrong characters. " +
                               "Input must be integer or float val");
             answer = false;
         }
@@ -109,14 +113,14 @@ class Program
         while(inputIsInt)
         {
             input = Console.ReadLine();
-            if (CheckInput(input))
+            if (CheckInputTask2(input))
                 Console.WriteLine(StringManager.FindSumOfDigitsInNumber(input));
             else
                 Console.WriteLine("Invalid input - input must be integer number.");
         }
     }
 
-    public static bool CheckInput(string input)
+    public static bool CheckInputTask2(string input)
     {
         bool answer = input.Length > 0 &&
             StringManager.CheckForWrongChars(input);
@@ -129,4 +133,45 @@ class Program
         }
         return answer;
     }
+
+    public static void ExecuteFourthTask()
+    {
+        Console.WriteLine("Enter size of array as integer number.");
+        while (true)
+        {
+            string inputArrStr = Console.ReadLine();
+            Console.WriteLine("Input passed.");
+            var inputArr = new List<int>();
+            if (CheckInputTask4(inputArrStr, ref inputArr))
+            {
+                inputArr.ForEach(Console.WriteLine);
+            }
+        }
+    }
+
+    public static bool CheckInputTask4(string input, ref List<int> inputArr)
+    {
+        bool answer;
+        if (!string.IsNullOrEmpty(input))
+        {
+            List<string> inputArrStr = new List<string>(input.Split(" "));
+            answer = inputArrStr.Any(num => CheckInputToBeIntOrFloat(num) && 
+                                         CheckForIntOverFlowTask1(num));
+            if (answer)
+                inputArr = inputArrStr.Select(int.Parse).ToList();
+            else 
+                Console.WriteLine("At least one value is not a number.");
+        }
+        else
+        {
+            answer = false;
+            Console.WriteLine("Null or empty input.");
+        }
+
+        return answer;
+    }
+    
+    
+    
+    
 }
