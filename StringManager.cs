@@ -139,11 +139,12 @@
         public static string Cut(string number)
         {
             string cutNumber;
+            //mb cause of Enter there was an '\0', debugger does not show this
             number = DeleteZero(number);
             int pointIndex = number.IndexOf('.');
             cutNumber = 
                 number.Substring(pointIndex + 1, number.Length - pointIndex - 1).TrimStart('0');
-            //have no idea why TrimStart return whitespace
+            //whitespace just in case, idk
             if (string.IsNullOrEmpty(cutNumber) || string.IsNullOrWhiteSpace(cutNumber))
                 cutNumber = "0";
             return cutNumber;

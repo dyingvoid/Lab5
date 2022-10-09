@@ -135,7 +135,6 @@ namespace Lab5
             while (true)
             {
                 string inputArrStr = Console.ReadLine() ?? string.Empty;
-                Console.WriteLine("Input passed.");
                 var inputArr = new List<string>();
                 if (CheckInputTask4(inputArrStr, ref inputArr))
                 {
@@ -170,11 +169,11 @@ namespace Lab5
 
         public static bool CheckInputTask4(string input, ref List<string> inputArr)
         {
-            bool answer;
+            bool answer;    
             if (!string.IsNullOrEmpty(input))
             {
                 List<string> inputArrStr = new List<string>(input.Split(" "));
-                answer = inputArrStr.Any(num => CheckInputToBeIntOrFloat(num) &&
+                answer = inputArrStr.TrueForAll(num => CheckInputToBeIntOrFloat(num) &&
                                                 CheckForIntOverFlowTask1(num));
                 if (answer)
                     inputArr = inputArrStr;
