@@ -139,17 +139,14 @@
         public static string Cut(string number)
         {
             string cutNumber;
+            number = DeleteZero(number);
             int pointIndex = number.IndexOf('.');
-            cutNumber = number.Substring(pointIndex + 1, number.Length - pointIndex - 1);
-
-            int startingDigitIndex = 0;
-            foreach (var digit in cutNumber)
-            {
-                if (digit != 0)
-                    break;
-                startingDigitIndex += 1;
-            }
-            return cutNumber.Substring(startingDigitIndex + 1, cutNumber.Length - startingDigitIndex - 1);
+            cutNumber = 
+                number.Substring(pointIndex + 1, number.Length - pointIndex - 1).TrimStart('0');
+            //have no idea why TrimStart return whitespace
+            if (string.IsNullOrEmpty(cutNumber) || string.IsNullOrWhiteSpace(cutNumber))
+                cutNumber = "0";
+            return cutNumber;
         }
         
         /// <summary>
@@ -172,6 +169,11 @@
             }
             roundedNumber = new string(safeNumberArr).Substring(0, pointIndex + midPointRounding + 1);
             return roundedNumber;
+        }
+
+        public static string DeleteZero(string wrongString)
+        {
+            return string.Join("", wrongString.Split("\0"));
         }
     }
 }
