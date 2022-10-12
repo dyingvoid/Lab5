@@ -2,10 +2,16 @@
 
 public static class AdditionalChecks
 {
+    /// <summary>
+    /// Checks input to be number using
+    /// StringManager.IsInt() and StringManager.IsFloat()
+    /// </summary>
+    /// <param name="input">number in string format</param>
+    /// <returns>True for number, false for not a number, null or empty</returns>
     public static bool CheckInputToBeIntOrFloat(string input)
     {
         bool answer = true;
-        if (string.IsNullOrEmpty(input) || input.Length == 0 ||
+        if (string.IsNullOrEmpty(input) ||
             !(StringManager.IsInt(input) || StringManager.IsFloat(input)))
         {
             Console.WriteLine("Your input contains wrong characters. " +
@@ -16,6 +22,14 @@ public static class AdditionalChecks
         return answer;
     }
     
+    /// <summary>
+    /// Checks for Int32 overflow using StringManager.IsBigger()
+    /// </summary>
+    /// <param name="input">Integer number in string format</param>
+    /// <returns>
+    /// True for Int32 and float, false for overflow.
+    /// Undefined behaviour for not a number
+    /// </returns>
     public static bool CheckForIntOverFlow(string input)
     {
         bool answer = true;
@@ -29,6 +43,15 @@ public static class AdditionalChecks
         return answer;
     }
     
+    
+    /// <summary>
+    /// Checks if number is integer and fits in Int32 size.
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns>
+    /// True for Int32, false for overflow.
+    /// Undefined for not a number.
+    /// </returns>
     public static bool CheckInputToBeInt32(string input)
     {
         bool answer = input.Length > 0 &&
