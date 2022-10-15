@@ -64,7 +64,7 @@ namespace Lab5
                 {
                     //for some reason huge int numbers can be parsed to float
                     //Does not activate for floats
-                    if (!AdditionalChecks.CheckForIntOverFlow(input))
+                    if (AdditionalChecks.CheckForIntOverFlow(input))
                         continue;
 
                     if (CompareFloats(floatCompare1, floatCompare2, 0.1))

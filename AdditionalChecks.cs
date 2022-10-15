@@ -33,7 +33,11 @@ public static class AdditionalChecks
     public static bool CheckForIntOverFlow(string input)
     {
         bool answer = true;
-        if (!input.Contains('.') && StringManager.IsBigger(input, int.MaxValue.ToString()))
+        answer = !input.Contains('.') &&
+            StringManager.IsBigger(input, 
+                StringManager.IsNegative(input) ? int.MinValue.ToString() : int.MaxValue.ToString());
+        
+        if (answer)
         {
             Console.WriteLine($"You entered too big number, integer value must fit in {int.MinValue} : " +
                               $"{int.MaxValue} range.");
@@ -55,14 +59,9 @@ public static class AdditionalChecks
     public static bool CheckInputToBeInt32(string input)
     {
         bool answer = input.Length > 0 &&
-                      StringManager.IsInt(input);
-        if (answer)
-        {
-            if (StringManager.IsNegative(input))
-                answer = !StringManager.IsBigger(input, int.MinValue.ToString());
-            else
-                answer = !StringManager.IsBigger(input, int.MaxValue.ToString());
-        }
+                      StringManager.IsInt(input) &&
+                      !StringManager.IsBigger(input,
+                          StringManager.IsNegative(input) ? int.MinValue.ToString() : int.MaxValue.ToString());
         return answer;
     }
 
